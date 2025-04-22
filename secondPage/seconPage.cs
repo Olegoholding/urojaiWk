@@ -30,35 +30,36 @@ namespace urojaiWk.secondPage
         {
 
         }
-        public static string connStr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\radie\\OneDrive\\Рабочий стол\\vovaBd.accdb";
+        public static string connStr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\radie\\OneDrive\\Рабочий стол\\bddb.accdb";
 
         Dictionary<string, string> engNames = new Dictionary<string, string>
         {
-                {"Бригады",$@"brigadi"},
-                {"Журнал",$@"journal"},
-                {"Продукция",$@"produkciya"},
-                {"Сборщики",$@"sborshiki"}
+                {"Спортсмены",$@"sportsmen"},
+                {"Стадионы",$@"stadion"},
+                {"Виды спорта",$@"vidiSporta"},
+                {"Журнал выступлений",$@"journal"}
         };
         Dictionary<string, string> inf = new Dictionary<string, string>
         {
-                {"Бригады",$@"Совершить поиск номеру бригадира"},
-                {"Журнал",$@"Совершить поиск дате"},
-                {"Продукция",$@"Совершить поиск названию"},
-                {"Сборщики",$@"Совершить поиск номеру бригадира"}
+                {"Спортсмены",$@"Совершить поиск фамилия"},
+                {"Виды спорта",$@"Совершить поиск названию"},
+                {"Стадионы",$@"Совершить поиск названию"},
+                {"Журнал выступлений",$@"Совершить поиск по дате"}
         };
         Dictionary<string, string> tables = new Dictionary<string, string>
         {
-                {"brigadi",$@"{sqlTables.brigadi}"},
-                {"produkciya",$@"{sqlTables.produkciya}"},
+                {"sportsmen",$@"{sqlTables.sportsmen}"},
+                {"stadion",$@"{sqlTables.stadion}"},
                 {"journal",$@"{sqlTables.journal}"},
-                {"sborshiki",$@"{sqlTables.sborshiki}"}
+                {"vidiSporta",$@"{sqlTables.vidiSporta}"}
         };
+
         private class sqlTables
         {
-            public static string brigadi = "SELECT id AS Номер, nazvaniye AS Название, id_brigadira AS НомерБригадира FROM brigadi";
-            public static string journal = "SELECT id AS Номер, id_produkciya AS НомерПродукции, id_brigadi AS НомерБригады, data AS Дата FROM journal";
-            public static string produkciya = "SELECT id AS Номер, imya AS ИмяПродукции, type AS ТипПродукции FROM produkciya";
-            public static string sborshiki = "SELECT id AS Номер, familiya AS Фамилия, imya AS Имя, id_brigada AS НомерБригады FROM sborshiki";
+            public static string stadion = "SELECT id AS Номер, nazvaniye AS Название, adress AS Адресс FROM stadion";
+            public static string journal = "SELECT id AS Номер, id_sportsmena AS НомерСпортсмена, id_stadiona AS НомерСтадиона, mesto AS МестоУчастия ,data AS Дата FROM journal";
+            public static string vidiSporta = "SELECT id AS Номер, nazvaniye AS Название FROM vidiSporta";
+            public static string sportsmen = "SELECT id AS Номер, familiya AS Фамилия, imya AS Имя, id_vidSporta AS НомерВидаСпорта FROM sportsmen";
             public static string engNames;
             public static string temp;
         }
@@ -163,10 +164,10 @@ namespace urojaiWk.secondPage
         {
             Dictionary<string, string> tablesSearch = new Dictionary<string, string>
         {
-            {"brigadi", $"{sqlTables.brigadi} WHERE id_brigadira LIKE ?"},
-            {"produkciya", $"{sqlTables.produkciya} WHERE imya LIKE ?"},
+            {"sportsmen", $"{sqlTables.sportsmen} WHERE imya LIKE ?"},
+            {"stadion", $"{sqlTables.stadion} WHERE nazvaniye LIKE ?"},
             {"journal", $"{sqlTables.journal} WHERE data LIKE ?"},
-            {"sborshiki", $"{sqlTables.sborshiki} WHERE id_brigada LIKE ?"}
+            {"vidiSporta", $"{sqlTables.vidiSporta} WHERE nazvaniye LIKE ?"}
         };
 
             tablesSearch.TryGetValue(sqlTables.engNames, out string query);

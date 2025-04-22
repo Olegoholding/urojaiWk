@@ -35,20 +35,20 @@
             // enterBtn
             // 
             this.enterBtn.Font = new System.Drawing.Font("Microsoft YaHei UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.enterBtn.Location = new System.Drawing.Point(155, 167);
+            this.enterBtn.Location = new System.Drawing.Point(12, 150);
             this.enterBtn.Name = "enterBtn";
-            this.enterBtn.Size = new System.Drawing.Size(461, 126);
+            this.enterBtn.Size = new System.Drawing.Size(471, 126);
             this.enterBtn.TabIndex = 0;
-            this.enterBtn.Text = "Просмотреть формы";
+            this.enterBtn.Text = "Просмотр таблиц";
             this.enterBtn.UseVisualStyleBackColor = true;
             this.enterBtn.Click += new System.EventHandler(this.enterBtn_Click);
             // 
             // exitBtn
             // 
             this.exitBtn.Font = new System.Drawing.Font("Microsoft YaHei UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.exitBtn.Location = new System.Drawing.Point(12, 438);
+            this.exitBtn.Location = new System.Drawing.Point(12, 282);
             this.exitBtn.Name = "exitBtn";
-            this.exitBtn.Size = new System.Drawing.Size(77, 67);
+            this.exitBtn.Size = new System.Drawing.Size(471, 67);
             this.exitBtn.TabIndex = 1;
             this.exitBtn.Text = "❌";
             this.exitBtn.UseVisualStyleBackColor = true;
@@ -58,7 +58,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(774, 517);
+            this.ClientSize = new System.Drawing.Size(494, 517);
             this.Controls.Add(this.exitBtn);
             this.Controls.Add(this.enterBtn);
             this.Name = "mainPage";

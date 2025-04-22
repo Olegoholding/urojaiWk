@@ -46,26 +46,26 @@
             this.dataGrid.Name = "dataGrid";
             this.dataGrid.RowHeadersWidth = 51;
             this.dataGrid.RowTemplate.Height = 24;
-            this.dataGrid.Size = new System.Drawing.Size(942, 477);
+            this.dataGrid.Size = new System.Drawing.Size(760, 477);
             this.dataGrid.TabIndex = 0;
             // 
             // addBtn
             // 
             this.addBtn.Font = new System.Drawing.Font("Microsoft YaHei UI", 16.2F, System.Drawing.FontStyle.Bold);
-            this.addBtn.Location = new System.Drawing.Point(13, 568);
+            this.addBtn.Location = new System.Drawing.Point(778, 426);
             this.addBtn.Name = "addBtn";
-            this.addBtn.Size = new System.Drawing.Size(472, 41);
+            this.addBtn.Size = new System.Drawing.Size(184, 84);
             this.addBtn.TabIndex = 1;
-            this.addBtn.Text = "Внести изменения";
+            this.addBtn.Text = "Добавить";
             this.addBtn.UseVisualStyleBackColor = true;
             this.addBtn.Click += new System.EventHandler(this.AddBtn_Click);
             // 
             // dltBtn
             // 
             this.dltBtn.Font = new System.Drawing.Font("Microsoft YaHei UI", 16.2F, System.Drawing.FontStyle.Bold);
-            this.dltBtn.Location = new System.Drawing.Point(479, 567);
+            this.dltBtn.Location = new System.Drawing.Point(778, 516);
             this.dltBtn.Name = "dltBtn";
-            this.dltBtn.Size = new System.Drawing.Size(475, 42);
+            this.dltBtn.Size = new System.Drawing.Size(184, 45);
             this.dltBtn.TabIndex = 2;
             this.dltBtn.Text = "Удалить";
             this.dltBtn.UseVisualStyleBackColor = true;
@@ -76,15 +76,15 @@
             this.srcEdit.Font = new System.Drawing.Font("Microsoft YaHei UI", 16.2F, System.Drawing.FontStyle.Bold);
             this.srcEdit.Location = new System.Drawing.Point(13, 36);
             this.srcEdit.Name = "srcEdit";
-            this.srcEdit.Size = new System.Drawing.Size(504, 42);
+            this.srcEdit.Size = new System.Drawing.Size(759, 42);
             this.srcEdit.TabIndex = 3;
             // 
             // srcBtn
             // 
             this.srcBtn.Font = new System.Drawing.Font("Microsoft YaHei UI", 16.2F, System.Drawing.FontStyle.Bold);
-            this.srcBtn.Location = new System.Drawing.Point(523, 37);
+            this.srcBtn.Location = new System.Drawing.Point(778, 37);
             this.srcBtn.Name = "srcBtn";
-            this.srcBtn.Size = new System.Drawing.Size(241, 41);
+            this.srcBtn.Size = new System.Drawing.Size(184, 41);
             this.srcBtn.TabIndex = 4;
             this.srcBtn.Text = "Поиск";
             this.srcBtn.UseVisualStyleBackColor = true;
@@ -105,15 +105,15 @@
             this.tablesCm.Font = new System.Drawing.Font("Microsoft YaHei UI", 16.2F, System.Drawing.FontStyle.Bold);
             this.tablesCm.FormattingEnabled = true;
             this.tablesCm.Items.AddRange(new object[] {
-            "Бригады",
-            "Сборщики",
-            "Продукция",
-            "Журнал"});
-            this.tablesCm.Location = new System.Drawing.Point(770, 34);
+            "Спортсмены",
+            "Виды спорта",
+            "Стадионы",
+            "Журнал выступлений"});
+            this.tablesCm.Location = new System.Drawing.Point(778, 117);
             this.tablesCm.Name = "tablesCm";
             this.tablesCm.Size = new System.Drawing.Size(184, 44);
             this.tablesCm.TabIndex = 6;
-            this.tablesCm.Text = "Бригады";
+            this.tablesCm.Text = "Спортсмены";
             this.tablesCm.SelectedIndexChanged += new System.EventHandler(this.tablesCm_SelectedIndexChanged);
             this.tablesCm.Click += new System.EventHandler(this.tablesCm_SelectedIndexChanged);
             // 
@@ -121,7 +121,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(772, 8);
+            this.label2.Location = new System.Drawing.Point(777, 89);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(177, 25);
             this.label2.TabIndex = 7;
@@ -131,7 +131,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(966, 622);
+            this.ClientSize = new System.Drawing.Size(972, 574);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tablesCm);
             this.Controls.Add(this.infLbl);
