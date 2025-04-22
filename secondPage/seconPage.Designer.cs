@@ -58,7 +58,7 @@
             this.addBtn.TabIndex = 1;
             this.addBtn.Text = "Внести изменения";
             this.addBtn.UseVisualStyleBackColor = true;
-            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
+            this.addBtn.Click += new System.EventHandler(this.AddBtn_Click);
             // 
             // dltBtn
             // 
@@ -69,7 +69,7 @@
             this.dltBtn.TabIndex = 2;
             this.dltBtn.Text = "Удалить";
             this.dltBtn.UseVisualStyleBackColor = true;
-            this.dltBtn.Click += new System.EventHandler(this.dltBtn_Click);
+            this.dltBtn.Click += new System.EventHandler(this.DltBtn_Click);
             // 
             // srcEdit
             // 
@@ -88,7 +88,7 @@
             this.srcBtn.TabIndex = 4;
             this.srcBtn.Text = "Поиск";
             this.srcBtn.UseVisualStyleBackColor = true;
-            this.srcBtn.Click += new System.EventHandler(this.srcBtn_Click);
+            this.srcBtn.Click += new System.EventHandler(this.SrcBtn_Click);
             // 
             // infLbl
             // 
@@ -113,7 +113,9 @@
             this.tablesCm.Name = "tablesCm";
             this.tablesCm.Size = new System.Drawing.Size(184, 44);
             this.tablesCm.TabIndex = 6;
+            this.tablesCm.Text = "Бригады";
             this.tablesCm.SelectedIndexChanged += new System.EventHandler(this.tablesCm_SelectedIndexChanged);
+            this.tablesCm.Click += new System.EventHandler(this.tablesCm_SelectedIndexChanged);
             // 
             // label2
             // 

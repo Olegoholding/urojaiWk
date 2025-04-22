@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -29,7 +30,7 @@ namespace urojaiWk.secondPage
         {
 
         }
-        public static string connStr = "Server = 95.183.12.18; Port = 3306; Database=sborWk; user=sborUser; password=123";
+        public static string connStr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\radie\\OneDrive\\Рабочий стол\\vovaBd.accdb";
 
         Dictionary<string, string> engNames = new Dictionary<string, string>
         {
@@ -56,7 +57,7 @@ namespace urojaiWk.secondPage
         {
             public static string brigadi = "SELECT id AS Номер, nazvaniye AS Название, id_brigadira AS НомерБригадира FROM brigadi";
             public static string journal = "SELECT id AS Номер, id_produkciya AS НомерПродукции, id_brigadi AS НомерБригады, data AS Дата FROM journal";
-            public static string produkciya = "SELECT id AS Номер, name AS НомерПродукции, type AS ТипПродукции FROM produkciya";
+            public static string produkciya = "SELECT id AS Номер, imya AS ИмяПродукции, type AS ТипПродукции FROM produkciya";
             public static string sborshiki = "SELECT id AS Номер, familiya AS Фамилия, imya AS Имя, id_brigada AS НомерБригады FROM sborshiki";
             public static string engNames;
             public static string temp;
@@ -72,24 +73,23 @@ namespace urojaiWk.secondPage
             infLbl.Text = inLbl;
             sqlTables.temp = query;
 
-            loadData(query);
+            LoadData(query);
         }
-        private void loadData(string query)
+        private void LoadData(string query)
         {
-            using (MySqlConnection conn = new MySqlConnection($"{connStr}"))
+            using (OleDbConnection conn = new OleDbConnection(connStr))
             {
                 try
                 {
                     conn.Open();
-                    using (MySqlCommand command = new MySqlCommand(query, conn))
+                    using (OleDbCommand command = new OleDbCommand(query, conn))
                     {
-                        MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                        OleDbDataAdapter adapter = new OleDbDataAdapter(command);
                         DataTable dataTable = new DataTable();
                         adapter.Fill(dataTable);
                         dataGrid.DataSource = dataTable;
                         dataGrid.AutoGenerateColumns = true;
                     }
-                    conn.Close();
                 }
                 catch (Exception ex)
                 {
@@ -98,28 +98,30 @@ namespace urojaiWk.secondPage
             }
         }
 
-        private void dltBtn_Click(object sender, EventArgs e)
+        private void DltBtn_Click(object sender, EventArgs e)
         {
             try
             {
                 int ID = int.Parse(dataGrid.Rows[dataGrid.CurrentRow.Index].Cells["Номер"].Value.ToString());
-                using (MySqlConnection connection = new MySqlConnection(connStr))
+                using (OleDbConnection connection = new OleDbConnection(connStr))
                 {
-                    string query = $"DELETE FROM {sqlTables.engNames} WHERE id = {ID}";
-                    MySqlCommand command = new MySqlCommand(query, connection);
-                    try
+                    string query = $"DELETE FROM {sqlTables.engNames} WHERE id = ?";
+                    using (OleDbCommand command = new OleDbCommand(query, connection))
                     {
-                        connection.Open();
-                        int rowsAffected = command.ExecuteNonQuery();
-                        loadData(sqlTables.temp);
-                    }
-                    catch (Exception ex)
-                    {
-                        loadData(sqlTables.temp);
-                        MessageBox.Show($"Ошибка: {ex.Message}");
+                        command.Parameters.AddWithValue("?", ID);
+                        try
+                        {
+                            connection.Open();
+                            int rowsAffected = command.ExecuteNonQuery();
+                            LoadData(sqlTables.temp);
+                        }
+                        catch (Exception ex)
+                        {
+                            LoadData(sqlTables.temp);
+                            MessageBox.Show($"Ошибка: {ex.Message}");
+                        }
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -127,7 +129,7 @@ namespace urojaiWk.secondPage
             }
         }
 
-        private void addBtn_Click(object sender, EventArgs e)
+        private void AddBtn_Click(object sender, EventArgs e)
         {
             tables.TryGetValue(sqlTables.engNames, out string query);
 
@@ -137,21 +139,19 @@ namespace urojaiWk.secondPage
             table.TableName = sqlTables.engNames;
             dataSet.Tables.Add(table);
 
-            //foreach (DataColumn column in table.Columns) { MessageBox.Show(column.ColumnName); }
-#warning TO "Olehgoholding"
             try
             {
-                using (var conn = new MySqlConnection(connStr))
+                using (var conn = new OleDbConnection(connStr))
                 {
-                    var adapter = new MySqlDataAdapter();
-                    adapter.SelectCommand = new MySqlCommand(query, conn);
-                    var builder = new MySqlCommandBuilder(adapter);
+                    var adapter = new OleDbDataAdapter();
+                    adapter.SelectCommand = new OleDbCommand(query, conn);
+                    var builder = new OleDbCommandBuilder(adapter);
 
                     adapter.InsertCommand = builder.GetInsertCommand();
                     adapter.Update(dataSet, sqlTables.engNames);
                 }
                 dataSet.Reset();
-                loadData(query);
+                LoadData(query);
             }
             catch (Exception ex)
             {
@@ -159,17 +159,20 @@ namespace urojaiWk.secondPage
             }
         }
 
-        private void srcBtn_Click(object sender, EventArgs e)
+        private void SrcBtn_Click(object sender, EventArgs e)
         {
             Dictionary<string, string> tablesSearch = new Dictionary<string, string>
         {
-                {"brigadi",$@"{sqlTables.brigadi} WHERE id_brigadira LIKE '{srcEdit.Text}%'"},
-                {"produkciya",$@"{sqlTables.produkciya} WHERE name LIKE '{srcEdit.Text}%'"},
-                {"journal",$@"{sqlTables.journal} WHERE data LIKE '{srcEdit.Text}%'"},
-                {"sborshiki",$@"{sqlTables.sborshiki} WHERE id_brigada LIKE '{srcEdit.Text}%'"}
+            {"brigadi", $"{sqlTables.brigadi} WHERE id_brigadira LIKE ?"},
+            {"produkciya", $"{sqlTables.produkciya} WHERE imya LIKE ?"},
+            {"journal", $"{sqlTables.journal} WHERE data LIKE ?"},
+            {"sborshiki", $"{sqlTables.sborshiki} WHERE id_brigada LIKE ?"}
         };
+
             tablesSearch.TryGetValue(sqlTables.engNames, out string query);
-            loadData(query);
+            query = query.Replace("?", $"'{srcEdit.Text}%'");
+
+            LoadData(query);
         }
     }
 }
