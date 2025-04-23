@@ -36,6 +36,7 @@
             this.infLbl = new System.Windows.Forms.Label();
             this.tablesCm = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -127,11 +128,24 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "Выбрать таблицу";
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.8F, System.Drawing.FontStyle.Bold);
+            this.checkBox1.Location = new System.Drawing.Point(703, 8);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(259, 29);
+            this.checkBox1.TabIndex = 8;
+            this.checkBox1.Text = "Упрощённый просмотр";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // seconPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(972, 574);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tablesCm);
             this.Controls.Add(this.infLbl);
@@ -159,5 +173,6 @@
         private System.Windows.Forms.Label infLbl;
         private System.Windows.Forms.ComboBox tablesCm;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

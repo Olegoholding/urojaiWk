@@ -57,9 +57,11 @@ namespace urojaiWk.secondPage
         private class sqlTables
         {
             public static string stadion = "SELECT id AS Номер, nazvaniye AS Название, adress AS Адресс FROM stadion";
-            public static string journal = "SELECT id AS Номер, id_sportsmena AS НомерСпортсмена, id_stadiona AS НомерСтадиона, mesto AS МестоУчастия ,data AS Дата FROM journal";
+            public static string journal = "SELECT journal.id AS Номер, id_sportsmena AS НомерСпортсмена, id_stadiona AS НомерСтадиона, mesto AS МестоУчастия ,data AS Дата FROM journal";
             public static string vidiSporta = "SELECT id AS Номер, nazvaniye AS Название FROM vidiSporta";
-            public static string sportsmen = "SELECT id AS Номер, familiya AS Фамилия, imya AS Имя, id_vidSporta AS НомерВидаСпорта FROM sportsmen";
+            public static string sportsmen = "SELECT sportsmen.id AS Номер, familiya AS Фамилия, imya AS Имя, id_vidSporta AS НомерВидаСпорта FROM sportsmen";
+            public static string sportsmenJoin = "SELECT sportsmen.id AS Номер, familiya AS Фамилия, imya AS Имя, vidiSporta.nazvaniye AS ВидСпорта FROM (sportsmen LEFT JOIN vidiSporta ON sportsmen.id_vidSporta = vidiSporta.id)";
+            public static string stadionJoin = "SELECT journal.id AS Номер, stadion.nazvaniye AS НазваниеСтадиона, sportsmen.familiya AS Фамилия, mesto AS МестоУчастия, data AS ДатаУчастия FROM ((journal LEFT JOIN stadion ON journal.id_stadiona = stadion.id) LEFT JOIN sportsmen ON journal.id_sportsmena = sportsmen.id)";
             public static string engNames;
             public static string temp;
         }
@@ -73,6 +75,8 @@ namespace urojaiWk.secondPage
 
             infLbl.Text = inLbl;
             sqlTables.temp = query;
+
+            checkBox1.Checked = false;
 
             LoadData(query);
         }
@@ -174,6 +178,25 @@ namespace urojaiWk.secondPage
             query = query.Replace("?", $"'{srcEdit.Text}%'");
 
             LoadData(query);
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            string rusNames = tablesCm.Text;
+            engNames.TryGetValue(rusNames, out sqlTables.engNames);
+            
+
+            if (checkBox1.Checked)
+            {
+                var tables = new Dictionary<string, string>
+                {
+                    {"sportsmen",$@"{sqlTables.sportsmenJoin}"},
+                    {"journal",$@"{sqlTables.stadionJoin}"}
+                };
+                tables.TryGetValue(sqlTables.engNames, out string query);
+                MessageBox.Show(query);
+                LoadData(query);
+            }
         }
     }
 }
