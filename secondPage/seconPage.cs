@@ -169,7 +169,7 @@ namespace urojaiWk.secondPage
         {
             Dictionary<string, string> tablesSearch = new Dictionary<string, string>
         {
-            {"sportsmen", $"{sqlTables.sportsmen} WHERE imya LIKE ?"},
+            {"sportsmen", $"{sqlTables.sportsmen} WHERE familiya LIKE ?"},
             {"stadion", $"{sqlTables.stadion} WHERE nazvaniye LIKE ?"},
             {"journal", $"{sqlTables.journal} WHERE data LIKE ?"},
             {"vidiSporta", $"{sqlTables.vidiSporta} WHERE nazvaniye LIKE ?"}
