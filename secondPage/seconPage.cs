@@ -58,7 +58,7 @@ namespace urojaiWk.secondPage
         private class sqlTables
         {
             public static string stadion = "SELECT id AS Номер, nazvaniye AS Название, adress AS Адресс FROM stadion";
-            public static string journal = "SELECT journal.id AS Номер, id_sportsmena AS НомерСпортсмена, id_stadiona AS НомерСтадиона, mesto AS МестоУчастия ,data AS Дата FROM journal";
+            public static string journal = "SELECT journal.id AS Номер, id_sportsmena AS НомерСпортсмена, id_stadiona AS НомерСтадиона, data AS Дата FROM journal";
             public static string vidiSporta = "SELECT id AS Номер, nazvaniye AS Название FROM vidiSporta";
             public static string sportsmen = "SELECT sportsmen.id AS Номер, familiya AS Фамилия, imya AS Имя, id_vidSporta AS НомерВидаСпорта FROM sportsmen";
             public static string sportsmenJoin = "SELECT sportsmen.id AS Номер, familiya AS Фамилия, imya AS Имя, vidiSporta.nazvaniye AS ВидСпорта FROM (sportsmen LEFT JOIN vidiSporta ON sportsmen.id_vidSporta = vidiSporta.id)";
