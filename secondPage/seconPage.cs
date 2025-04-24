@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace urojaiWk.secondPage
 {
@@ -28,7 +29,7 @@ namespace urojaiWk.secondPage
 
         private void seconPage_Load(object sender, EventArgs e)
         {
-
+            tablesCm.DropDownStyle = ComboBoxStyle.DropDownList;
         }
         public static string connStr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\radie\\OneDrive\\Рабочий стол\\bddb.accdb";
 
@@ -61,7 +62,7 @@ namespace urojaiWk.secondPage
             public static string vidiSporta = "SELECT id AS Номер, nazvaniye AS Название FROM vidiSporta";
             public static string sportsmen = "SELECT sportsmen.id AS Номер, familiya AS Фамилия, imya AS Имя, id_vidSporta AS НомерВидаСпорта FROM sportsmen";
             public static string sportsmenJoin = "SELECT sportsmen.id AS Номер, familiya AS Фамилия, imya AS Имя, vidiSporta.nazvaniye AS ВидСпорта FROM (sportsmen LEFT JOIN vidiSporta ON sportsmen.id_vidSporta = vidiSporta.id)";
-            public static string stadionJoin = "SELECT journal.id AS Номер, stadion.nazvaniye AS НазваниеСтадиона, sportsmen.familiya AS Фамилия, mesto AS МестоУчастия, data AS ДатаУчастия FROM ((journal LEFT JOIN stadion ON journal.id_stadiona = stadion.id) LEFT JOIN sportsmen ON journal.id_sportsmena = sportsmen.id)";
+            public static string stadionJoin = "SELECT journal.id AS Номер, stadion.nazvaniye AS НазваниеСтадиона, sportsmen.familiya AS Фамилия, data AS ДатаУчастия FROM ((journal LEFT JOIN stadion ON journal.id_stadiona = stadion.id) LEFT JOIN sportsmen ON journal.id_sportsmena = sportsmen.id)";
             public static string engNames;
             public static string temp;
         }
@@ -191,10 +192,12 @@ namespace urojaiWk.secondPage
                 var tables = new Dictionary<string, string>
                 {
                     {"sportsmen",$@"{sqlTables.sportsmenJoin}"},
-                    {"journal",$@"{sqlTables.stadionJoin}"}
+                    {"journal",$@"{sqlTables.stadionJoin}"},
+                    {"vidiSporta", $"{sqlTables.vidiSporta}"},
+                    {"stadion", $"{sqlTables.stadion}"}
                 };
                 tables.TryGetValue(sqlTables.engNames, out string query);
-                MessageBox.Show(query);
+                //MessageBox.Show(query);
                 LoadData(query);
             }
         }
