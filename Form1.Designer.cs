@@ -30,12 +30,13 @@
         {
             this.enterBtn = new System.Windows.Forms.Button();
             this.exitBtn = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // enterBtn
             // 
             this.enterBtn.Font = new System.Drawing.Font("Microsoft YaHei UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.enterBtn.Location = new System.Drawing.Point(155, 167);
+            this.enterBtn.Location = new System.Drawing.Point(161, 107);
             this.enterBtn.Name = "enterBtn";
             this.enterBtn.Size = new System.Drawing.Size(461, 126);
             this.enterBtn.TabIndex = 0;
@@ -54,11 +55,22 @@
             this.exitBtn.UseVisualStyleBackColor = true;
             this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft YaHei UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button1.Location = new System.Drawing.Point(161, 239);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(461, 126);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Быстрое добавление";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // mainPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(774, 517);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.exitBtn);
             this.Controls.Add(this.enterBtn);
             this.Name = "mainPage";
@@ -71,6 +83,7 @@
 
         private System.Windows.Forms.Button enterBtn;
         private System.Windows.Forms.Button exitBtn;
+        private System.Windows.Forms.Button button1;
     }
 }
 

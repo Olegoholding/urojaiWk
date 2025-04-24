@@ -105,10 +105,10 @@
             this.tablesCm.Font = new System.Drawing.Font("Microsoft YaHei UI", 16.2F, System.Drawing.FontStyle.Bold);
             this.tablesCm.FormattingEnabled = true;
             this.tablesCm.Items.AddRange(new object[] {
-            "Бригады",
-            "Сборщики",
-            "Продукция",
-            "Журнал"});
+            "Билеты",
+            "Журнал",
+            "Компании",
+            "Рейсы"});
             this.tablesCm.Location = new System.Drawing.Point(770, 34);
             this.tablesCm.Name = "tablesCm";
             this.tablesCm.Size = new System.Drawing.Size(184, 44);

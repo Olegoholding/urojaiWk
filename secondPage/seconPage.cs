@@ -29,35 +29,42 @@ namespace urojaiWk.secondPage
         {
 
         }
-        public static string connStr = "Server = 95.183.12.18; Port = 3306; Database=sborWk; user=sborUser; password=123";
+        public static string connStr = "Server = 95.183.12.18; Port = 3306; Database=airlines; user=airUser; password=123";
 
         Dictionary<string, string> engNames = new Dictionary<string, string>
         {
-                {"Бригады",$@"brigadi"},
+                {"Билеты",$@"bileti"},
                 {"Журнал",$@"journal"},
-                {"Продукция",$@"produkciya"},
-                {"Сборщики",$@"sborshiki"}
+                {"Компании",$@"kompanii"},
+                {"Рейсы",$@"reisi"}
         };
         Dictionary<string, string> inf = new Dictionary<string, string>
         {
-                {"Бригады",$@"Совершить поиск номеру бригадира"},
+                {"Билеты",$@"Совершить поиск стоимости"},
                 {"Журнал",$@"Совершить поиск дате"},
-                {"Продукция",$@"Совершить поиск названию"},
-                {"Сборщики",$@"Совершить поиск номеру бригадира"}
+                {"Компании",$@"Совершить поиск названию"},
+                {"Рейсы",$@"Совершить поиск номеру имени рейса"}
         };
         Dictionary<string, string> tables = new Dictionary<string, string>
         {
-                {"brigadi",$@"{sqlTables.brigadi}"},
-                {"produkciya",$@"{sqlTables.produkciya}"},
+                {"bileti",$@"{sqlTables.bileti}"},
                 {"journal",$@"{sqlTables.journal}"},
-                {"sborshiki",$@"{sqlTables.sborshiki}"}
+                {"kompanii",$@"{sqlTables.kompanii}"},
+                {"reisi",$@"{sqlTables.reisi}"}
         };
         private class sqlTables
         {
-            public static string brigadi = "SELECT id AS Номер, nazvaniye AS Название, id_brigadira AS НомерБригадира FROM brigadi";
-            public static string journal = "SELECT id AS Номер, id_produkciya AS НомерПродукции, id_brigadi AS НомерБригады, data AS Дата FROM journal";
-            public static string produkciya = "SELECT id AS Номер, name AS НомерПродукции, type AS ТипПродукции FROM produkciya";
-            public static string sborshiki = "SELECT id AS Номер, familiya AS Фамилия, imya AS Имя, id_brigada AS НомерБригады FROM sborshiki";
+            public static string bileti = "SELECT bileti.id AS Номер, id_kompanii AS НомерКомпании, id_reisa AS НомерРейса, cost AS Цена FROM bileti";
+            public static string journal = "SELECT journal.id AS Номер, id_kompanii AS НомерКомпании, id_reisa AS НомерРейса, id_bileta AS НомерБилета, data AS Дата FROM journal";
+            public static string kompanii = "SELECT kompanii.id AS Номер, imyaKompanii AS ИмяКомпании FROM kompanii";
+            public static string reisi = "SELECT reisi.id AS Номер, imyaReisa AS ИмяРейса, otkuda AS Откуда, kuda AS Куда, id_kompanii AS НомерКомпании FROM reisi";
+            //public static string bileti = @"SELECT bileti.id AS Номер, kompanii.imyaKompanii AS НазваниеКомпании, reisi.imyaReisa AS НазваниеРейса, cost AS Цена FROM bileti";
+            //LEFT JOIN kompanii ON id_kompanii = kompanii.id LEFT JOIN reisi ON id_reisa = reisi.id
+            //public static string journal = @"SELECT journal.id AS Номер, kompanii.imyaKompanii AS НазваниеКомпании, reisi.imyaReisa AS НазваниеРейса, id_bileta AS НомерБилета, data AS Дата FROM journal";
+            //LEFT JOIN kompanii ON id_kompanii = kompanii.id LEFT JOIN reisi ON id_reisa = reisi.id
+            //public static string kompanii = "SELECT kompanii.id AS Номер, imyaKompanii AS НазваниеКомпании FROM kompanii";
+            //public static string reisi = @"SELECT reisi.id AS Номер, imyaReisa AS ИмяРейса, otkuda AS Откуда, kuda AS Куда, kompanii.imyaKompanii AS ИмяКомпании FROM reisi";
+            //LEFT JOIN kompanii ON id_kompanii = kompanii.id;
             public static string engNames;
             public static string temp;
         }
@@ -163,10 +170,10 @@ namespace urojaiWk.secondPage
         {
             Dictionary<string, string> tablesSearch = new Dictionary<string, string>
         {
-                {"brigadi",$@"{sqlTables.brigadi} WHERE id_brigadira LIKE '{srcEdit.Text}%'"},
-                {"produkciya",$@"{sqlTables.produkciya} WHERE name LIKE '{srcEdit.Text}%'"},
+                {"bileti",$@"{sqlTables.bileti} WHERE cost LIKE '{srcEdit.Text}%'"},
                 {"journal",$@"{sqlTables.journal} WHERE data LIKE '{srcEdit.Text}%'"},
-                {"sborshiki",$@"{sqlTables.sborshiki} WHERE id_brigada LIKE '{srcEdit.Text}%'"}
+                {"kompanii",$@"{sqlTables.kompanii} WHERE imyaKompanii LIKE '{srcEdit.Text}%'"},
+                {"reisi",$@"{sqlTables.reisi} WHERE imyaReisa LIKE '{srcEdit.Text}%'"}
         };
             tablesSearch.TryGetValue(sqlTables.engNames, out string query);
             loadData(query);
